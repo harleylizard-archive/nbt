@@ -4,7 +4,7 @@ import java.io.DataInput
 import java.util.*
 import kotlin.collections.ArrayList
 
-data class ListTag(private val list: List<Tag>, private val opcode: Byte) : Tag {
+open class ListTag protected constructor(protected open val list: List<Tag>, private val opcode: Byte) : Tag {
 
 	companion object : TagType<ListTag> {
 		@JvmStatic

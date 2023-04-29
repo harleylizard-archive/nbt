@@ -3,7 +3,8 @@ package com.chaottic.nbt.number
 import com.chaottic.nbt.TagType
 import java.io.DataInput
 
-data class FloatTag(private val f: Float) : NumberTag {
+@JvmInline
+value class FloatTag(private val f: Float) : NumberTag {
 
 	override fun asByte() = f.toInt().toByte()
 	override fun asShort() = f.toInt().toShort()

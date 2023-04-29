@@ -3,7 +3,7 @@ package com.chaottic.nbt
 import java.io.DataInput
 import java.util.*
 
-data class CompoundTag(private val map: Map<String, Tag>) : Tag {
+open class CompoundTag protected constructor(protected open val map: Map<String, Tag>) : Tag {
 
 	companion object : TagType<CompoundTag> {
 

@@ -3,7 +3,8 @@ package com.chaottic.nbt.number
 import com.chaottic.nbt.TagType
 import java.io.DataInput
 
-data class ShortTag(private val s: Short) : NumberTag {
+@JvmInline
+value class ShortTag(private val s: Short) : NumberTag {
 
 	override fun asByte() = s.toByte()
 	override fun asShort() = s
