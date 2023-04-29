@@ -1,5 +1,7 @@
 plugins {
+    kotlin("jvm") version "1.8.20"
     `java-library`
+    id("io.freefair.lombok") version "8.0.1"
 }
 
 group = "com.chaottic"

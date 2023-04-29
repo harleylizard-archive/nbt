@@ -1,0 +1,31 @@
+package com.chaottic.nbt
+
+import java.io.DataInput
+import java.util.*
+import kotlin.collections.ArrayList
+
+data class ListTag(private val list: List<Tag>, private val opcode: Byte) : Tag {
+
+	companion object : TagType<ListTag> {
+		@JvmStatic
+		private val empty = ListTag(emptyList(), 0)
+
+		override fun createTag(dataInput: DataInput): ListTag {
+			val opcode = dataInput.readByte()
+			val size = dataInput.readInt()
+
+			if (opcode == 0.toByte()) {
+				return empty
+			}
+
+			val list = ArrayList<Tag>(size)
+			val type = TagType.getFromOpcode(opcode)
+
+			for (i in 0 until size) {
+				list.add(type.createTag(dataInput))
+			}
+
+			return ListTag(Collections.unmodifiableList(list), opcode)
+		}
+	}
+}
