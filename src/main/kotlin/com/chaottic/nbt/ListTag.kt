@@ -4,11 +4,16 @@ import java.io.DataInput
 import java.util.*
 import kotlin.collections.ArrayList
 
-open class ListTag protected constructor(protected open val list: List<Tag>, private val opcode: Byte) : Tag {
+open class ListTag protected constructor(protected open val list: List<Tag>, val opcode: Byte) : Tag, Iterable<Tag> {
+	val size; get() = list.size
+
+	operator fun get(i: Int) = list[i]
+
+	override fun iterator() = list.iterator()
 
 	companion object : TagType<ListTag> {
 		@JvmStatic
-		private val empty = ListTag(emptyList(), 0)
+		internal val empty = ListTag(emptyList(), 0)
 
 		override fun createTag(dataInput: DataInput): ListTag {
 			val opcode = dataInput.readByte()
